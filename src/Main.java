@@ -1,5 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+        //test-kod
+        GameBoard gameBoard = new GameBoard(5,5,3);
+        gameBoard.showBoard();
+        gameBoard.showFullBoard();
     }
 }
