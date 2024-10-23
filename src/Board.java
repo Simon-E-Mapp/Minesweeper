@@ -49,6 +49,27 @@ public class Board {
         }
     }
 
+    public void printBoardAndMines() {
+        // Print column numbers
+        System.out.print("  ");
+        for (int i = 0; i < columns; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
+
+        // Print rows
+        for (int i = 0; i < rows; i++) {
+            System.out.print(i + " ");
+            for (int j = 0; j < columns; j++) {
+                if (cells[i][j].isMine()) {
+                    System.out.print("* ");
+                } else {
+                    System.out.print(". ");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
 
 

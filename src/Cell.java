@@ -15,4 +15,5 @@ public class Cell {
         this.isMine = mine;
     }
 
+
 }

@@ -1,9 +1,9 @@
 public class Main {
     public static void main(String[] args) {
-        Board board = new Board(5, 5, 5);  // 5x5 board with 5 mines
+        Board board = new Board(5, 5, 4);
 
         board.printBoard();
-
+        board.printBoardAndMines();
 
     }
 }
