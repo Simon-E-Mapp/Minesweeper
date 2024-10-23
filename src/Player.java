@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class Player {
 
@@ -18,11 +18,33 @@ public class Player {
         this.level = level;
     }
 
+    /**
+     * the method writes to the file highscore.txt
+     *
+     * @param player object of type Player
+     * @throws IOException
+     */
+    public void writeToHighscore(Player player) throws IOException {
 
+        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen
+
+        output.println(player.getName());
+        output.println(player.getTime());
+        output.println(player.getLevel());
+
+        output.close();
+
+    }
+
+    /**
+     * the method reads data from the file Higscore.txt and s
+     * aves the information in the highscore list
+     * @throws IOException
+     */
     public void readHighScore() throws IOException {
 
         //make stream from file
-        var input = new BufferedReader(new FileReader("src/Highscore.txt"));
+        BufferedReader input = new BufferedReader(new FileReader("src/Highscore.txt"));
 
         //read file
         while (true) {
@@ -36,6 +58,11 @@ public class Player {
         }
     }
 
+    /**
+     * Prints the top 10 of all levels on the console
+     *
+     * @throws IOException
+     */
     public void printHighScore() throws IOException {
 
         readHighScore();
@@ -50,8 +77,8 @@ public class Player {
         List<Player> hardLevel = highScore.stream()                          //make a list of all level hard Players
                 .filter(player -> "Hard".equals(player.getLevel())).toList();
 
+        //TODO method that will sort the high score
 
-        /* Print to consol the top 10 of each level */
 
         System.out.println("******* HARD *********");
         for(int i = 0; i < hardLevel.size(); i++)
@@ -64,13 +91,6 @@ public class Player {
         System.out.println("******* EASY *********");
         for(int i = 0; i < easyLevel.size(); i++)
             System.out.println(i + ". "+ easyLevel.get(i).getName() + " " + easyLevel.get(i).getTime());
-
-
-
-        /*for (Player player : hardLevel) {                                       //Todo endast för test, Tas bort
-            System.out.println(player.getName() + " " + player.getLevel());
-        }*/
-
 
     }
 
@@ -85,6 +105,15 @@ public class Player {
 
     public String getLevel() {
         return level;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", time='" + time + '\'' +
+                ", level='" + level + '\'' +
+                '}';
     }
 }
 
