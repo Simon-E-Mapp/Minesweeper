@@ -34,32 +34,30 @@ public class GameBoard {
         }
     }
 
-    //prints out
+    //prints out board
     public void showBoard() {
-        System.out.print(" |");
-        for (int x = 0; x < width; x++) {
-            System.out.print(x + "|");
-        }
-        System.out.println();
         for (int y = 0; y < height; y++) {
-            System.out.print(y + "|");
+            System.out.print("|");
             for (int x = 0; x < width; x++) {
-                System.out.print("+|");
+                System.out.print("+|"); // hidden cells shows as "+"
             }
+            System.out.print(" " + y); // prints out row number to the right
             System.out.println();
         }
+
+        // prints out column number under the board
+        System.out.print(" ");
+        for (int x = 0; x < width; x++) {
+            char columnLabel = (char) ('A' + x); // convert the number to char
+            System.out.print(columnLabel + " "); // prints the column number
+        }
+        System.out.println();
     }
 
     //print out all cells visible
     public void showFullBoard() {
-        System.out.print(" |");
-        for (int x = 0; x < width; x++) {
-            System.out.print(x + "|");
-        }
-        System.out.println();
-
         for (int y = 0; y < height; y++) {
-            System.out.print(y + "|");
+            System.out.print("|");
             for (int x = 0; x < width; x++) {
                 Cell cell = board[x][y];
                 if (cell.isMine()) {
@@ -68,8 +66,15 @@ public class GameBoard {
                     System.out.print("0|");
                 }
             }
+            System.out.print(" " + y);
             System.out.println();
         }
+        System.out.print(" ");
+        for (int x = 0; x < width; x++) {
+            char columnLabel = (char) ('A' + x);
+            System.out.print(columnLabel + " ");
+        }
+        System.out.println();
     }
 
 }
