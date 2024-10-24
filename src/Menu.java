@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
     boolean menuOpen = true;
-    int choice = 1;
+
 
     /*Call Player class to create a new player object??
     Player playerName = new Player();*/
