@@ -1,24 +1,40 @@
 import java.util.Scanner;
 
 public class Game {
+    private GameBoard board;
+    private Scanner scanner;
 
-    Scanner scanner = new Scanner(System.in);
-    GameBoard board;
-    public void startGame(int width, int height, int mines){
-        int choice = scanner.nextInt();
-        switch (choice){
-            case 1:
-                board = new GameBoard(5, 5, 5); // easy
+    public Game() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void startGame(int width, int height, int mines) {
+        this.board = new GameBoard(width, height, mines);
+        System.out.println("Game started!");
+
+        while (true) {
+            board.showBoard();
+            System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
+            String column = scanner.next().toUpperCase();
+            int row = scanner.nextInt();
+
+            boolean isAlive = makeMove(column, row);
+            if (!isAlive) {
+                System.out.println("Game Over! You hit a mine!");
+                board.showFullBoard();
                 break;
-            case 2:
-                board = new GameBoard(10, 10, 10); // medium
-                break;
-            case 3:
-                board = new GameBoard(15, 15, 15); // hard
-                break;
-            default:{
-                board = new GameBoard(5, 5, 5); // easy
             }
-        }board.showBoard();
+        }
+        System.out.println("Thanks for playing!");
+    }
+
+    private boolean makeMove(String column, int row) {
+        try {
+            int x = column.charAt(0) - 'A';
+            return board.revealCell(x, row);
+        } catch (Exception e) {
+            scanner.nextLine(); // Clear scanner buffer
+            return true; // Don't end game on invalid input
+        }
     }
 }

@@ -5,18 +5,26 @@ public class Menu {
     boolean menuOpen = true;
     int input = -1;
 
-    // Constructor:
-    public Menu(){
-        displayMenu();
-    }
-
-
     /*Call Player class to create a new player object??
     Player playerName = new Player();*/
+
+    Game game;
+    private int currentWidth = 10;
+    private int currentHeight = 10;
+    private int currentMines = 10;
+
+    // Constructor:
+    public Menu() {
+        this.game = new Game();
+        displayMenu();
+    }
 
     // displayMenu method
     private void displayMenu() {
         do {
+            // Declared player input variable
+            int input;
+
             // Prints the banner
             System.out.print("\033[1;94m");
             System.out.println("\n==========|| MAIN MENU ||=========");
@@ -44,11 +52,11 @@ public class Menu {
                         make a new player. Player class yadda yadda.
                     }
                     */
-
                     // Call game method from the Game class to start game?
-                    continue;
+                    game.startGame(currentWidth, currentHeight, currentMines);
+                    break;
 
-                    // DIFFICULTY SUBMENU
+                // DIFFICULTY SUBMENU
                 case 2:
                     // ??call settings from within another class?
                     boolean subMenuOpen = true;
@@ -65,28 +73,34 @@ public class Menu {
                         System.out.println("4) Go Back");
                         System.out.print("\n\033[0m");
 
-                        input = sc.nextInt();
-                        Game gameE = new Game();
-                        Game gameM = new Game();
-                        Game gameH = new Game();
+                        input = getPlayerInt();
+
                         switch (input) {
                             case 1:
                                 // Set game to easy difficulty
                                 System.out.println("\033[3mDifficulty set to Easy\n\033[0m");
+                                currentWidth = 5;
+                                currentHeight = 5;
+                                currentMines = 5;
                                 subMenuOpen = false;
-                                gameE.startGame(5, 5, 5);
                                 break;
+
                             case 2:
                                 // Set game to medium difficulty
                                 System.out.println("\033[3mDifficulty set to Medium\n\033[0m");
+                                currentWidth = 10;
+                                currentHeight = 10;
+                                currentMines = 10;
                                 subMenuOpen = false;
-                                gameM.startGame(10, 10, 10);
                                 break;
+
                             case 3:
                                 // Set game to hard difficulty
                                 System.out.println("\033[3mDifficulty set to Hard\n\033[0m");
+                                currentWidth = 15;
+                                currentHeight = 15;
+                                currentMines = 15;
                                 subMenuOpen = false;
-                                gameH.startGame(15, 15, 15);
                                 break;
 
                             // Goes back to the main menu
@@ -99,17 +113,16 @@ public class Menu {
                                 System.out.println("Please select a number between 1-4");
                                 // Clears the scanner and waits for the player to press a key before going back
                                 sc.nextLine();
-//                                continue;
                         }
                     } while (subMenuOpen);
+                    break;
 
-
-                    // HIGHSCORE
+                // HIGHSCORE
                 case 3:
                     // Get highscore from inside player class?
-                    continue;
+                    break;
 
-                    // EXIT
+                // EXIT
                 case 4:
                     menuOpen = false;
                     //closes the scanner, not sure if necessary?:
@@ -120,7 +133,6 @@ public class Menu {
                 default:
                     System.out.println("Please enter a number between 1-4");
                     sc.nextLine();
-//                    continue;
             }
         } while (menuOpen);
     }

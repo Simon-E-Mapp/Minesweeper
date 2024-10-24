@@ -13,14 +13,16 @@ public class GameBoard {
         this.board = new Cell[width][height];
         fillBoard();
     }
-    public void fillBoard(){
-        for (int x = 0; x < width; x++){
-            for (int y = 0; y < height; y++){
+
+    public void fillBoard() {
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
                 board[x][y] = new Cell();
             }
         }
         placeMines();
     }
+
     private void placeMines() {
         Random rand = new Random();
         int placedMines = 0;
@@ -34,36 +36,54 @@ public class GameBoard {
         }
     }
 
-    //prints out board
+    public boolean revealCell(int x, int y) {
+        if (!isValidMove(x, y)) {
+            System.out.println("Invalid move! Please try again.");
+            return true;
+        }
+
+        Cell cell = board[x][y];
+        if (cell.isMine()) {
+            cell.show();
+            return false;
+        }
+
+        int count = countAdjacentMines(x, y);
+        cell.show();
+        cell.setNearbyMines(count);
+        return true;
+    }
+
+    private boolean isValidMove(int x, int y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
+    private int countAdjacentMines(int x, int y) {
+        int count = 0;
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                int adjacentX = x + i;
+                int adjacentY = y + j;
+                if (isValidMove(adjacentX, adjacentY) && board[adjacentX][adjacentY].isMine()) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public void showBoard() {
         for (int y = 0; y < height; y++) {
             System.out.print("|");
             for (int x = 0; x < width; x++) {
-                System.out.print("+|"); // hidden cells shows as "+"
-            }
-            System.out.print(" " + y); // prints out row number to the right
-            System.out.println();
-        }
-
-        // prints out column number under the board
-        System.out.print(" ");
-        for (int x = 0; x < width; x++) {
-            char columnLabel = (char) ('A' + x); // convert the number to char
-            System.out.print(columnLabel + " "); // prints the column number
-        }
-        System.out.println();
-    }
-
-    //print out all cells visible
-    public void showFullBoard() {
-        for (int y = 0; y < height; y++) {
-            System.out.print("|");
-            for (int x = 0; x < width; x++) {
-                Cell cell = board[x][y];
-                if (cell.isMine()) {
-                    System.out.print("*|");
+                if (board[x][y].isVisible()) {
+                    if (board[x][y].isMine()) {
+                        System.out.print("*|");
+                    } else {
+                        System.out.print(board[x][y].getNearbyMines() + "|");
+                    }
                 } else {
-                    System.out.print("0|");
+                    System.out.print("+|");
                 }
             }
             System.out.print(" " + y);
@@ -77,4 +97,25 @@ public class GameBoard {
         System.out.println();
     }
 
+    public void showFullBoard() {
+        for (int y = 0; y < height; y++) {
+            System.out.print("|");
+            for (int x = 0; x < width; x++) {
+                Cell cell = board[x][y];
+                if (cell.isMine()) {
+                    System.out.print("*|");
+                } else {
+                    System.out.print(countAdjacentMines(x, y) + "|");
+                }
+            }
+            System.out.print(" " + y);
+            System.out.println();
+        }
+        System.out.print(" ");
+        for (int x = 0; x < width; x++) {
+            char columnLabel = (char) ('A' + x);
+            System.out.print(columnLabel + " ");
+        }
+        System.out.println();
+    }
 }
