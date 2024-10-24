@@ -6,7 +6,7 @@ public class Menu {
     int input = -1;
 
     // Constructor:
-    public void Menu(){
+    public Menu(){
         displayMenu();
     }
 
@@ -92,7 +92,7 @@ public class Menu {
                                 System.out.println("Please select a number between 1-4");
                                 // Clears the scanner and waits for the player to press a key before going back
                                 sc.nextLine();
-                                continue;
+//                                continue;
                         }
                     } while (subMenuOpen);
 
@@ -113,7 +113,7 @@ public class Menu {
                 default:
                     System.out.println("Please enter a number between 1-4");
                     sc.nextLine();
-                    continue;
+//                    continue;
             }
         } while (menuOpen);
     }
