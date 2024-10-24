@@ -4,6 +4,7 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
     boolean menuOpen = true;
     int input = -1;
+    Player player = new Player();
 
     /*Call Player class to create a new player object??
     Player playerName = new Player();*/
@@ -22,9 +23,6 @@ public class Menu {
     // displayMenu method
     private void displayMenu() {
         do {
-            // Declared player input variable
-            int input;
-
             // Prints the banner
             System.out.print("\033[1;94m");
             System.out.println("\n==========|| MAIN MENU ||=========");
@@ -48,10 +46,11 @@ public class Menu {
 
                 // GAME START
                 case 1:
-                    /*if playerName = ""{
-                        make a new player. Player class yadda yadda.
-                    }
-                    */
+//                  if (player.getName() == null)
+//                  add if we can go back to main and possibly change the player name in the future??
+                    System.out.println("Please enter your name.");
+                    player.setName(getPlayerName());
+
                     // Call game method from the Game class to start game?
                     game.startGame(currentWidth, currentHeight, currentMines);
                     break;
@@ -119,7 +118,13 @@ public class Menu {
 
                 // HIGHSCORE
                 case 3:
-                    // Get highscore from inside player class?
+                    // gets highscore from the player class.
+                    // Maybe the try parse should be a separate method in the player class instead?
+                    try {
+                        new Player().printHighScore();
+                    } catch (Exception e) {
+                        System.out.println("There was an error in fetching the highscores.");
+                    }
                     break;
 
                 // EXIT
@@ -138,7 +143,7 @@ public class Menu {
     }
 
     // Prevents crashes if the player enters anything but an integer
-    public int getPlayerInt() {
+    private int getPlayerInt() {
         while (!sc.hasNextInt()) {
             System.out.println("Please enter a number between 1-4");
             sc.nextLine();
@@ -146,5 +151,11 @@ public class Menu {
         int playerInt = sc.nextInt();
         sc.nextLine();
         return playerInt;
+    }
+
+    private String getPlayerName() {
+        String playerName = sc.nextLine();
+        System.out.println("Hi, " + playerName + "!");
+        return playerName;
     }
 }
