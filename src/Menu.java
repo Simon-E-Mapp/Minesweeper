@@ -3,16 +3,19 @@ import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
     boolean menuOpen = true;
+    int input = -1;
+
+    // Constructor:
+    public void Menu(){
+        displayMenu();
+    }
 
     /*Call Player class to create a new player object??
     Player playerName = new Player();*/
 
     // displayMenu method
-    public void displayMenu() {
+    private void displayMenu() {
         do {
-            // Declared player input variable
-            int input;
-
             // Prints the banner
             System.out.print("\033[1;94m");
             System.out.println("\n==========|| MAIN MENU ||=========");
@@ -30,7 +33,7 @@ public class Menu {
             System.out.print("\n\033[0m");
 
             // Takes input from player
-            input = sc.nextInt();
+            input = getPlayerInt();
 
             switch (input) {
 
@@ -42,9 +45,9 @@ public class Menu {
                     */
 
                     // Call game method from the Game class to start game?
+                    continue;
 
-
-                // DIFFICULTY SUBMENU
+                    // DIFFICULTY SUBMENU
                 case 2:
                     // ??call settings from within another class?
                     boolean subMenuOpen = true;
@@ -57,7 +60,7 @@ public class Menu {
                         System.out.print("\033[1;97m");
                         System.out.println("1) Easy");
                         System.out.println("2) Medium");
-                        System.out.println("2) Hard");
+                        System.out.println("3) Hard");
                         System.out.println("4) Go Back");
                         System.out.print("\n\033[0m");
 
@@ -94,11 +97,12 @@ public class Menu {
                     } while (subMenuOpen);
 
 
-                // HIGHSCORE
+                    // HIGHSCORE
                 case 3:
                     // Get highscore from inside player class?
+                    continue;
 
-                // EXIT
+                    // EXIT
                 case 4:
                     menuOpen = false;
                     //closes the scanner, not sure if necessary?:
@@ -107,13 +111,21 @@ public class Menu {
 
                 // ERROR MESSAGE
                 default:
-                    System.out.println("Please select a number between 1-4");
-                    // Clears the scanner and waits for the player to press a key before going back
+                    System.out.println("Please enter a number between 1-4");
                     sc.nextLine();
                     continue;
             }
         } while (menuOpen);
     }
 
-
+    // Prevents crashes if the player enters anything but an integer
+    public int getPlayerInt() {
+        while (!sc.hasNextInt()) {
+            System.out.println("Please enter a number between 1-4");
+            sc.nextLine();
+        }
+        int playerInt = sc.nextInt();
+        sc.nextLine();
+        return playerInt;
+    }
 }
