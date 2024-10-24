@@ -156,6 +156,11 @@ public class Player {
         return level;
     }
 
+    // (Elin) added a setter here to get the name in the menu
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Player{" + "name='" + name + '\'' + ", time='" + time + '\'' + ", level='" + level + '\'' + '}';
