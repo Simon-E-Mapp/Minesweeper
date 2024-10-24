@@ -5,14 +5,16 @@ import java.util.List;
 
 public class Player {
 
-    private String name, time, level;
+    private String name, level;
+    private long time;
+
     ArrayList<Player> highScore = new ArrayList<>();
 
 
     public Player() {
     }
 
-    public Player(String name, String time, String level) {
+    public Player(String name, long time, String level) {
         this.name = name;
         this.time = time;
         this.level = level;
@@ -37,8 +39,8 @@ public class Player {
     }
 
     /**
-     * the method reads data from the file Higscore.txt and s
-     * aves the information in the highscore list
+     * the method reads data from the file Higjscore.txt and
+     * saves the information in the highscore list
      * @throws IOException
      */
     public void readHighScore() throws IOException {
