@@ -15,6 +15,7 @@ public class Game {
         while (true) {
             board.showBoard();
             System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
+            // Get player input - column as letter, row as number
             String column = scanner.next().toUpperCase();
             int row = scanner.nextInt();
 
@@ -30,7 +31,7 @@ public class Game {
 
     private boolean makeMove(String column, int row) {
         try {
-            int x = column.charAt(0) - 'A';
+            int x = column.charAt(0) - 'A';     // Convert column letter to array index (A=0, B=1, etc.)
             return board.revealCell(x, row);
         } catch (Exception e) {
             scanner.nextLine(); // Clear scanner buffer
