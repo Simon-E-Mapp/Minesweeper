@@ -3,22 +3,22 @@ import java.util.Scanner;
 public class Game {
 
     Scanner scanner = new Scanner(System.in);
-
+    GameBoard board;
     public void startGame(int width, int height, int mines){
-        int input = scanner.nextInt();
-        switch (input){
+        int choice = scanner.nextInt();
+        switch (choice){
             case 1:
-                GameBoard easy = new GameBoard(5, 5, 5);
-                 break;
+                board = new GameBoard(5, 5, 5); // easy
+                break;
             case 2:
-                GameBoard medium = new GameBoard(10, 10, 10);
+                board = new GameBoard(10, 10, 10); // medium
                 break;
             case 3:
-                GameBoard hard = new GameBoard(15, 15, 15);
+                board = new GameBoard(15, 15, 15); // hard
                 break;
             default:{
-                System.out.println("Invalid option");
+                board = new GameBoard(5, 5, 5); // easy
             }
-        }
+        }board.showBoard();
     }
 }
