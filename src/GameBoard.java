@@ -5,6 +5,7 @@ public class GameBoard {
     private int width;
     private int height;
     private int mines;
+    private boolean isGameOver = false;
 
     public GameBoard(int width, int height, int mines) {
         this.width = width;
@@ -13,6 +14,20 @@ public class GameBoard {
         this.board = new Cell[width][height];
         fillBoard();
     }
+    public boolean isGameWon(){
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                if (!board[x][y].isMine() && !board[x][y].isVisible()){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
     public void fillBoard(){
         for (int x = 0; x < width; x++){
             for (int y = 0; y < height; y++){
