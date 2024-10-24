@@ -10,6 +10,7 @@ public class Menu {
         displayMenu();
     }
 
+
     /*Call Player class to create a new player object??
     Player playerName = new Player();*/
 
@@ -65,21 +66,27 @@ public class Menu {
                         System.out.print("\n\033[0m");
 
                         input = sc.nextInt();
+                        Game gameE = new Game();
+                        Game gameM = new Game();
+                        Game gameH = new Game();
                         switch (input) {
                             case 1:
                                 // Set game to easy difficulty
                                 System.out.println("\033[3mDifficulty set to Easy\n\033[0m");
                                 subMenuOpen = false;
+                                gameE.startGame(5, 5, 5);
                                 break;
                             case 2:
                                 // Set game to medium difficulty
                                 System.out.println("\033[3mDifficulty set to Medium\n\033[0m");
                                 subMenuOpen = false;
+                                gameM.startGame(10, 10, 10);
                                 break;
                             case 3:
                                 // Set game to hard difficulty
                                 System.out.println("\033[3mDifficulty set to Hard\n\033[0m");
                                 subMenuOpen = false;
+                                gameH.startGame(15, 15, 15);
                                 break;
 
                             // Goes back to the main menu

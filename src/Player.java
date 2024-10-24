@@ -1,18 +1,19 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class Player {
 
-    private String name, time, level;
+    private String name, level;
+    private long time;
+
     ArrayList<Player> highScore = new ArrayList<>();
 
 
     public Player() {
     }
 
-    public Player(String name, String time, String level) {
+    public Player(String name, long time, String level) {
         this.name = name;
         this.time = time;
         this.level = level;
@@ -29,7 +30,7 @@ public class Player {
         PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen
 
         output.println(player.getName());
-        output.println(player.getTime());
+        output.println(player.getTime()); //convert to seconds from milliseconds
         output.println(player.getLevel());
 
         output.close();
@@ -37,8 +38,9 @@ public class Player {
     }
 
     /**
-     * the method reads data from the file Higscore.txt and s
-     * aves the information in the highscore list
+     * the method reads data from the file Higjscore.txt and
+     * saves the information in the highscore list
+     *
      * @throws IOException
      */
     public void readHighScore() throws IOException {
@@ -51,7 +53,7 @@ public class Player {
             String name = input.readLine();
             if (name == null)        //end of file??
                 break;
-            String time = input.readLine();
+            long time = Long.parseLong(input.readLine());
             String level = input.readLine();
 
             highScore.add(new Player(name, time, level));
@@ -77,21 +79,67 @@ public class Player {
         List<Player> hardLevel = highScore.stream()                          //make a list of all level hard Players
                 .filter(player -> "Hard".equals(player.getLevel())).toList();
 
-        //TODO method that will sort the high score
 
+
+        //convert all highscore list to sorted list
+        List<Player> sortedHardLevel = sortHighScoreList(hardLevel);
+        List<Player> sortedMediumLevel = sortHighScoreList(mediumLevel);
+        List<Player> sortedEasyLevel = sortHighScoreList(easyLevel);
 
         System.out.println("******* HARD *********");
-        for(int i = 0; i < hardLevel.size(); i++)
-            System.out.println(i + ". "+ hardLevel.get(i).getName() + " " + hardLevel.get(i).getTime());
+        for (int i = 0; i < sortedHardLevel.size(); i++)
+            System.out.println(1 + i + ". " + sortedHardLevel.get(i).getName() + " " + convertToHourMinSec(sortedHardLevel.get(i).getTime()));
 
         System.out.println("******* MEDIUM *********");
-        for(int i = 0; i < mediumLevel.size(); i++)
-            System.out.println(i + ". "+ mediumLevel.get(i).getName() + " " + mediumLevel.get(i).getTime());
+        for (int i = 0; i < sortedMediumLevel.size(); i++)
+            System.out.println(1 + i + ". " + sortedMediumLevel.get(i).getName() + " " + convertToHourMinSec(sortedMediumLevel.get(i).getTime()));
+
 
         System.out.println("******* EASY *********");
-        for(int i = 0; i < easyLevel.size(); i++)
-            System.out.println(i + ". "+ easyLevel.get(i).getName() + " " + easyLevel.get(i).getTime());
+        for (int i = 0; i < sortedEasyLevel.size(); i++)
+            System.out.println(1 + i + ". " + sortedEasyLevel.get(i).getName() + " " + convertToHourMinSec(sortedEasyLevel.get(i).getTime()));
 
+    }
+
+    /**
+     * For ease of sorting the times, its saved in milliseconds.
+     * This method converts to a string with the format HH:MIN:SEC
+     * @param time in milliseconds
+     * @return String in format HH:MIN:SEC
+     */
+
+    public String convertToHourMinSec(long time) {
+
+        long hour, sec, min;
+
+        sec = (time / 1000) % 60;
+        min = (time / (1000 * 60)) % 60;
+        hour = time / (1000 * 60 * 60);
+
+        return hour + ":" + min + ":" + sec;
+
+    }
+
+    /**
+     *method sorts a list in order of lowest time to highest time
+     *
+     * @param highScore list to be sorted
+     * @return a sorted list
+     */
+    public List<Player> sortHighScoreList(List<Player> highScore) {
+
+        //kopiera listan för att inte göra ändringar i orginalet
+        List<Player> sortedList = new ArrayList<>(highScore);
+
+        Collections.sort(sortedList, new Comparator<Player>() {
+            @Override
+            public int compare(Player p1, Player p2) {
+                return Long.compare((p1.getTime()), p2.getTime());
+            }
+        });
+
+
+        return sortedList;
     }
 
 
@@ -99,8 +147,9 @@ public class Player {
         return name;
     }
 
-    public String getTime() {
-        return time;
+    public long getTime() {
+
+        return time;// / 1000;     //Convert in to seconds from milliseconds
     }
 
     public String getLevel() {
@@ -109,11 +158,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", time='" + time + '\'' +
-                ", level='" + level + '\'' +
-                '}';
+        return "Player{" + "name='" + name + '\'' + ", time='" + time + '\'' + ", level='" + level + '\'' + '}';
     }
 }
 
