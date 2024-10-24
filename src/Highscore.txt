@@ -1,69 +1,9 @@
-Bengt Nilsson
-00:12:00
+Henry Blom
+60000
 Easy
-Killer Ninja one
-01:00:23
-Medium
-Red power ape
-00:09:00
-Hard
-Karin Stål
-00:12:33
+Linda Svensson
+120000
 Easy
-Elin brons
-12:12:12
+Maria Blom
+200000
 Easy
-Peter Svensson
-12:23:09
-Medium
-Linda Olofsson
-23:12:09
-Easy
-Helge Sköld
-34:12:34
-Medium
-Holger "the mean machine" Svensson
-56:23:12
-Hard
-Bosse  Nilsson
-12:30:14
-Easy
-Johanna  Nilsson
-12:30:10
-medium
-Bosse  Nilsson
-12:30:14
-Hard
-Johanna  karlsson
-12:30:10
-medium
-Bosse  Nilsson
-12:30:14
-Easy
-Johanna  karlsson
-12:30:10
-medium
-Bosse  Nilsson
-12:30:14
-Easy
-Johanna  karlsson
-12:30:10
-Medium
-Fluttershy
-12:30:14
-Easy
-Appel Pie
-12:30:10
-Medium
-Rainbow dash
-10:30:13
-Hard
-Appeljack
-11:30:11
-Easy
-Rarity
-00:30:13
-medium
-Appel Bloom
-00:30:11
-hard
