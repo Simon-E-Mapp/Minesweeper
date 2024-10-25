@@ -14,6 +14,7 @@ public class Game {
 
         while (true) {
             board.showBoard();
+            board.showFullBoard();
             System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
             // Get player input - column as letter, row as number
             String column = scanner.next().toUpperCase();
@@ -21,7 +22,6 @@ public class Game {
 
             boolean isAlive = makeMove(column, row);
             if (!isAlive) {
-                System.out.println("Game Over! You hit a mine!");
                 board.showFullBoard();
                 break;
             }

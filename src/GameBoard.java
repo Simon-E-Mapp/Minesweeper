@@ -14,9 +14,9 @@ public class GameBoard {
         fillBoard();
     }
 
-    public void fillBoard() {
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+    public void fillBoard(){
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
                 board[x][y] = new Cell();
             }
         }
@@ -43,15 +43,23 @@ public class GameBoard {
         }
 
         Cell cell = board[x][y];
+
         // Check if player hit a mine
         if (cell.isMine()) {
             cell.show();  // Reveal the mine
+            System.out.println("Game Over! You hit a mine!");
             return false;
         }
         // Calculate and display the number of adjacent mines
         int count = countAdjacentMines(x, y);
         cell.show();
         cell.setNearbyMines(count);
+
+        //Checking for win-condition
+        if (isGameWon()) {
+            System.out.println("Congratulations! You Won!");
+            return false;
+        }
         return true;
     }
     // Check if the coordinates are within board boundaries
@@ -74,6 +82,17 @@ public class GameBoard {
         }
         return count;
     }
+    //Check for winning-conditions
+    public boolean isGameWon(){
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                if (!board[x][y].isMine() && !board[x][y].isVisible()){
+                    return false; //if the cell is not a mine and not visible return false
+                }
+            }
+        }
+        return true; //if all cells have been checked and only cells containing a mine is hidden return true
+    }
 
     public void showBoard() {
         for (int y = 0; y < height; y++) {
@@ -92,6 +111,8 @@ public class GameBoard {
             System.out.print(" " + y);  // prints out row number to the right
             System.out.println();
         }
+
+        // prints out column number under the board
         System.out.print(" ");
         for (int x = 0; x < width; x++) {
             char columnLabel = (char) ('A' + x); // convert the number to char
@@ -122,4 +143,5 @@ public class GameBoard {
         }
         System.out.println();
     }
+
 }
