@@ -5,7 +5,6 @@ public class GameBoard {
     private int width;
     private int height;
     private int mines;
-    private boolean isGameOver = false;
 
     public GameBoard(int width, int height, int mines) {
         this.width = width;
@@ -13,19 +12,6 @@ public class GameBoard {
         this.mines = mines;
         this.board = new Cell[width][height];
         fillBoard();
-    }
-    public boolean isGameWon(){
-        for (int x = 0; x < width; x++){
-            for (int y = 0; y < height; y++){
-                if (!board[x][y].isMine() && !board[x][y].isVisible()){
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    public boolean isGameOver() {
-        return isGameOver;
     }
 
     public void fillBoard(){
@@ -57,15 +43,23 @@ public class GameBoard {
         }
 
         Cell cell = board[x][y];
+
         // Check if player hit a mine
         if (cell.isMine()) {
             cell.show();  // Reveal the mine
+            System.out.println("Game Over! You hit a mine!");
             return false;
         }
         // Calculate and display the number of adjacent mines
         int count = countAdjacentMines(x, y);
         cell.show();
         cell.setNearbyMines(count);
+
+        //Checking for win-condition
+        if (isGameWon()) {
+            System.out.println("Congratulations! You Won!");
+            return false;
+        }
         return true;
     }
     // Check if the coordinates are within board boundaries
@@ -87,6 +81,17 @@ public class GameBoard {
             }
         }
         return count;
+    }
+    //Check for winning-conditions
+    public boolean isGameWon(){
+        for (int x = 0; x < width; x++){
+            for (int y = 0; y < height; y++){
+                if (!board[x][y].isMine() && !board[x][y].isVisible()){
+                    return false; //if the cell is not a mine and not visible return false
+                }
+            }
+        }
+        return true; //if all cells have been checked and only cells containing a mine is hidden return true
     }
 
     public void showBoard() {
