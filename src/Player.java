@@ -25,6 +25,7 @@ public class Player {
      * @param player object of type Player
      * @throws IOException
      */
+    // TODO writeToHighscore
     public void writeToHighscore(Player player) throws IOException {
 
         PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen

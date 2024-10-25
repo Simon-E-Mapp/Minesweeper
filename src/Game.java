@@ -14,7 +14,7 @@ public class Game {
 
         while (true) {
             board.showBoard();
-            board.showFullBoard();
+            // add board.showFullBoard(); for easier troubleshooting.
             System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
             // Get player input - column as letter, row as number
             String column = scanner.next().toUpperCase();
