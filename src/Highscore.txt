@@ -22,3 +22,9 @@ Medium
 Kung Karl
 29198
 Easy
+Victor
+65596
+Easy
+Victortest
+95285
+Easy
