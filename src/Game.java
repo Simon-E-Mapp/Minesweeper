@@ -1,16 +1,22 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Game {
     private GameBoard board;
     private Scanner scanner;
 
+    private long time;
+
+
     public Game() {
         this.scanner = new Scanner(System.in);
     }
 
-    public void startGame(int width, int height, int mines) {
+    public void startGame(int width, int height, int mines, Player player) throws IOException {
         this.board = new GameBoard(width, height, mines);
         System.out.println("Game started!");
+
+        long startTime = System.currentTimeMillis();  // TODO test
 
         while (true) {
             board.showBoard();
@@ -27,6 +33,11 @@ public class Game {
             }
         }
         System.out.println("Thanks for playing!");
+
+        long endTime = System.currentTimeMillis();    //Todo test
+        time = (endTime - startTime);
+
+        player.writeToHighscore(player,time);
     }
 
     private boolean makeMove(String column, int row) {
@@ -38,4 +49,10 @@ public class Game {
             return true; // Don't end game on invalid input
         }
     }
+
+    public long getTime() {   // Daniel, added to get time to Player class
+        return time;
+    }
 }
+
+

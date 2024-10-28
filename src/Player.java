@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class Player {
+public class Player extends Game{
 
     private String name, level;
     private long time;
@@ -11,11 +11,12 @@ public class Player {
 
 
     public Player() {
+    super();
     }
 
-    public Player(String name, long time, String level) {
+    public Player(String name,long time, String level) { //removed long time
         this.name = name;
-        this.time = time;
+       this.time = super.getTime();
         this.level = level;
     }
 
@@ -26,12 +27,12 @@ public class Player {
      * @throws IOException
      */
     // TODO writeToHighscore
-    public void writeToHighscore(Player player) throws IOException {
+    public void writeToHighscore(Player player, long time) throws IOException {
 
         PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen
 
         output.println(player.getName());
-        output.println(player.getTime()); //convert to seconds from milliseconds
+        output.println(time);
         output.println(player.getLevel());
 
         output.close();
@@ -157,9 +158,17 @@ public class Player {
         return level;
     }
 
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
     // (Elin) added a setter here to get the name in the menu
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setTime(long time) {   //??
+        this.time = time;
     }
 
     @Override
