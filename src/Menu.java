@@ -6,9 +6,6 @@ public class Menu {
     int input = -1;
     Player player = new Player();
 
-    /*Call Player class to create a new player object??
-    Player playerName = new Player();*/
-
     Game game;
     private int currentWidth = 10;
     private int currentHeight = 10;
@@ -35,7 +32,7 @@ public class Menu {
             System.out.print("\033[1;97m");
             System.out.println("1) Start Game");
             System.out.println("2) Change Difficulty");
-            System.out.println("3) Print Highscore");
+            System.out.println("3) Print high-score");
             System.out.println("4) Exit Game");
             System.out.print("\n\033[0m");
 
@@ -46,8 +43,6 @@ public class Menu {
 
                 // GAME START
                 case 1:
-//                  if (player.getName() == null)
-//                  add if we can go back to main and possibly change the player name in the future??
                     System.out.println("Please enter your name.");
                     player.setName(getPlayerName());
 
@@ -57,7 +52,6 @@ public class Menu {
 
                 // DIFFICULTY SUBMENU
                 case 2:
-                    // ??call settings from within another class?
                     boolean subMenuOpen = true;
 
                     do {
@@ -110,7 +104,6 @@ public class Menu {
                             // Displays error message
                             default:
                                 System.out.println("Please select a number between 1-4");
-                                // Clears the scanner and waits for the player to press a key before going back
                                 sc.nextLine();
                         }
                     } while (subMenuOpen);
@@ -118,19 +111,16 @@ public class Menu {
 
                 // HIGHSCORE
                 case 3:
-                    // gets highscore from the player class.
-                    // Maybe the try parse should be a separate method in the player class instead?
                     try {
                         new Player().printHighScore();
                     } catch (Exception e) {
-                        System.out.println("There was an error in fetching the highscores.");
+                        System.out.println("There was an error in fetching the high-scores.");
                     }
                     break;
 
                 // EXIT
                 case 4:
                     menuOpen = false;
-                    //closes the scanner, not sure if necessary?:
                     sc.close();
                     break;
 
@@ -142,7 +132,7 @@ public class Menu {
         } while (menuOpen);
     }
 
-    // Prevents crashes if the player enters anything but an integer
+    // Handles Integers
     private int getPlayerInt() {
         while (!sc.hasNextInt()) {
             System.out.println("Please enter a number between 1-4");
@@ -153,9 +143,13 @@ public class Menu {
         return playerInt;
     }
 
+    //Handles different strings
+    //TODO add more functionality beyond "getplayername"
     private String getPlayerName() {
         String playerName = sc.nextLine();
         System.out.println("Hi, " + playerName + "!");
         return playerName;
     }
+
+
 }
