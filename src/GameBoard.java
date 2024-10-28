@@ -6,6 +6,19 @@ public class GameBoard {
     private int height;
     private int mines;
 
+    private static final String RESET = "\u001B[0m";
+    private static final String[] NUMBER_COLORS = {
+            "\u001B[37m",  // WHITE for 0
+            "\u001B[34m",  // BLUE for 1
+            "\u001B[32m",  // GREEN for 2
+            "\u001B[31m",  // RED for 3
+            "\u001B[35m",  // PURPLE for 4
+            "\u001B[33m",  // YELLOW for 5
+            "\u001B[36m",  // CYAN for 6
+            "\u001B[37m",  // WHITE for 7
+            "\u001B[90m"   // GRAY for 8
+    };
+
     public GameBoard(int width, int height, int mines) {
         this.width = width;
         this.height = height;
@@ -102,7 +115,8 @@ public class GameBoard {
                     if (board[x][y].isMine()) {
                         System.out.print("*|");
                     } else {
-                        System.out.print(board[x][y].getNearbyMines() + "|");
+                        int mineCount = board[x][y].getNearbyMines();
+                        System.out.print(NUMBER_COLORS[mineCount] + mineCount + RESET + "|");
                     }
                 } else {
                     System.out.print("+|");
@@ -130,7 +144,8 @@ public class GameBoard {
                 if (cell.isMine()) {
                     System.out.print("*|");
                 } else {
-                    System.out.print(countAdjacentMines(x, y) + "|");
+                    int mineCount = countAdjacentMines(x, y);
+                    System.out.print(NUMBER_COLORS[mineCount] + mineCount + RESET + "|");
                 }
             }
             System.out.print(" " + y);
