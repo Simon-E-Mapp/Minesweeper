@@ -37,7 +37,9 @@ public class Game {
         long endTime = System.currentTimeMillis();    //Todo test
         time = (endTime - startTime);
 
-        player.writeToHighscore(player,time);
+        if (board.isGameWon()) {
+            player.writeToHighscore(player, time);
+        }
     }
 
     private boolean makeMove(String column, int row) {
