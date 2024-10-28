@@ -144,7 +144,8 @@ public class GameBoard {
                 if (cell.isMine()) {
                     System.out.print("*|");
                 } else {
-                    System.out.print(countAdjacentMines(x, y) + "|");
+                    int mineCount = countAdjacentMines(x, y);
+                    System.out.print(NUMBER_COLORS[mineCount] + mineCount + RESET + "|");
                 }
             }
             System.out.print(" " + y);
