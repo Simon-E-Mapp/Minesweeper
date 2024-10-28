@@ -38,14 +38,14 @@ public class Menu {
             System.out.print("\n\033[0m");
 
             // Takes input from player
-            input = getPlayerInt();
+            input = InputHandler.getPlayerInt();
 
             switch (input) {
 
                 // GAME START
                 case 1:
                     System.out.println("Please enter your name.");
-                    player.setName(getPlayerName());
+                    player.setName(InputHandler.getPlayerName());
 
                     // Call game method from the Game class to start game?
                     game.startGame(currentWidth, currentHeight, currentMines, player);
@@ -67,7 +67,7 @@ public class Menu {
                         System.out.println("4) Go Back");
                         System.out.print("\n\033[0m");
 
-                        input = getPlayerInt();
+                        input = InputHandler.getPlayerInt();
 
                         switch (input) {
                             case 1:
@@ -134,25 +134,6 @@ public class Menu {
                     sc.nextLine();
             }
         } while (menuOpen);
-    }
-
-    // Handles Integers
-    private int getPlayerInt() {
-        while (!sc.hasNextInt()) {
-            System.out.println("Please enter a number between 1-4");
-            sc.nextLine();
-        }
-        int playerInt = sc.nextInt();
-        sc.nextLine();
-        return playerInt;
-    }
-
-    //Handles different strings
-    //TODO add more functionality beyond "getplayername"
-    private String getPlayerName() {
-        String playerName = sc.nextLine();
-        System.out.println("Hi, " + playerName + "!");
-        return playerName;
     }
 
 
