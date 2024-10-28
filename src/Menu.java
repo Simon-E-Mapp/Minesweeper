@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menu {
@@ -12,13 +13,13 @@ public class Menu {
     private int currentMines = 10;
 
     // Constructor:
-    public Menu() {
+    public Menu() throws IOException {
         this.game = new Game();
         displayMenu();
     }
 
     // displayMenu method
-    private void displayMenu() {
+    private void displayMenu() throws IOException {
         do {
             // Prints the banner
             System.out.print("\033[1;94m");
@@ -47,7 +48,7 @@ public class Menu {
                     player.setName(getPlayerName());
 
                     // Call game method from the Game class to start game?
-                    game.startGame(currentWidth, currentHeight, currentMines);
+                    game.startGame(currentWidth, currentHeight, currentMines, player);
                     break;
 
                 // DIFFICULTY SUBMENU
@@ -76,6 +77,7 @@ public class Menu {
                                 currentHeight = 5;
                                 currentMines = 5;
                                 subMenuOpen = false;
+                                player.setLevel("Easy");   //Da added 28/10
                                 break;
 
                             case 2:
@@ -85,6 +87,7 @@ public class Menu {
                                 currentHeight = 10;
                                 currentMines = 10;
                                 subMenuOpen = false;
+                                player.setLevel("Medium");  //Da added 28/10
                                 break;
 
                             case 3:
@@ -94,6 +97,7 @@ public class Menu {
                                 currentHeight = 15;
                                 currentMines = 15;
                                 subMenuOpen = false;
+                                player.setLevel("Hard"); //Da added 28/10
                                 break;
 
                             // Goes back to the main menu
