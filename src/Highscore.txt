@@ -22,3 +22,6 @@ Medium
 Kung Karl
 29198
 Easy
+Daniel
+9001
+Easy

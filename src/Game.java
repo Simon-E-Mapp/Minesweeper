@@ -50,9 +50,6 @@ public class Game {
         }
     }
 
-    public long getTime() {   // Daniel, added to get time to Player class
-        return time;
-    }
 }
 
 

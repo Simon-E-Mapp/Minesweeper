@@ -5,6 +5,7 @@ import java.util.*;
 public class Player extends Game{
 
     private String name, level;
+    private long higsScoretime;
     private long time;
 
     ArrayList<Player> highScore = new ArrayList<>();
@@ -16,7 +17,7 @@ public class Player extends Game{
 
     public Player(String name,long time, String level) { //removed long time
         this.name = name;
-       this.time = super.getTime();
+       this.time = time;
         this.level = level;
     }
 
@@ -55,10 +56,10 @@ public class Player extends Game{
             String name = input.readLine();
             if (name == null)        //end of file??
                 break;
-            long time = Long.parseLong(input.readLine());
+            higsScoretime = Long.parseLong(input.readLine());
             String level = input.readLine();
 
-            highScore.add(new Player(name, time, level));
+            highScore.add(new Player(name, higsScoretime, level));
         }
     }
 
@@ -89,18 +90,20 @@ public class Player extends Game{
         List<Player> sortedEasyLevel = sortHighScoreList(easyLevel);
 
         System.out.println("******* HARD *********");
-        for (int i = 0; i < sortedHardLevel.size(); i++)
+        for (int i = 0; i < sortedHardLevel.size(); i++) {
             System.out.println(1 + i + ". " + sortedHardLevel.get(i).getName() + " " + convertToHourMinSec(sortedHardLevel.get(i).getTime()));
+        }
 
         System.out.println("******* MEDIUM *********");
-        for (int i = 0; i < sortedMediumLevel.size(); i++)
-            System.out.println(1 + i + ". " + sortedMediumLevel.get(i).getName() + " " + convertToHourMinSec(sortedMediumLevel.get(i).getTime()));
+        for (int i = 0; i < sortedMediumLevel.size(); i++) {
 
+            System.out.println(1 + i + ". " + sortedMediumLevel.get(i).getName() + " " + convertToHourMinSec(sortedMediumLevel.get(i).getTime()));
+        }
 
         System.out.println("******* EASY *********");
-        for (int i = 0; i < sortedEasyLevel.size(); i++)
+        for (int i = 0; i < sortedEasyLevel.size(); i++) {
             System.out.println(1 + i + ". " + sortedEasyLevel.get(i).getName() + " " + convertToHourMinSec(sortedEasyLevel.get(i).getTime()));
-
+        }
     }
 
     /**
@@ -114,9 +117,9 @@ public class Player extends Game{
 
         long hour, sec, min;
 
-        sec = (time / 1000) % 60;
-        min = (time / (1000 * 60)) % 60;
-        hour = time / (1000 * 60 * 60);
+        sec =  ((time / 1000) % 60);
+        min =  ((time / (1000 * 60)) % 60);
+        hour = (time / (1000 * 60 * 60));
 
         return hour + ":" + min + ":" + sec;
 
@@ -167,9 +170,6 @@ public class Player extends Game{
         this.name = name;
     }
 
-    public void setTime(long time) {   //??
-        this.time = time;
-    }
 
     @Override
     public String toString() {
