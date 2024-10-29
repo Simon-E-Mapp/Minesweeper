@@ -9,7 +9,7 @@ public class GameBoard {
     private static final String RESET = "\u001B[0m";
     private static final String RED_BACKGROUND = "\u001B[41m";
     private static final String[] NUMBER_COLORS = {
-            "\u001B[37m",  // WHITE for 0
+            "\u001B[97m",  // WHITE for 0
             "\u001B[34m",  // BLUE for 1
             "\u001B[32m",  // GREEN for 2
             "\u001B[31m",  // RED for 3

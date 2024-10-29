@@ -23,13 +23,18 @@ public class Game {
             // add board.showFullBoard(); for easier troubleshooting.
             System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
             // Get player input - column as letter, row as number
-            String column = scanner.next().toUpperCase();
-            int row = scanner.nextInt();
+            try {
+                String column = scanner.next().toUpperCase();
+                int row = scanner.nextInt();
 
-            boolean isAlive = makeMove(column, row);
-            if (!isAlive) {
-                board.showFullBoard();
-                break;
+                boolean isAlive = makeMove(column, row);
+                if (!isAlive) {
+                    board.showFullBoard();
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid move! Please use format 'A 5'");
+                scanner.nextLine(); // Clear scanner buffer
             }
         }
         System.out.println("Thanks for playing!");
@@ -51,7 +56,4 @@ public class Game {
             return true; // Don't end game on invalid input
         }
     }
-
 }
-
-
