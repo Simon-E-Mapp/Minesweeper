@@ -43,7 +43,12 @@ public class Game {
         time = (endTime - startTime);
 
         if (board.isGameWon()) {
-            player.writeToHighscore(player, time);
+            try {
+                player.writeToHighscore(player, time);
+            } catch (IOException e) {
+                System.out.println("Couldn't save high score!");
+            }
+
         }
     }
 

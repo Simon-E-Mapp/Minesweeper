@@ -115,7 +115,7 @@ public class Menu {
 
                 // HIGHSCORE
                 case 3:
-                    InputHandler.printHighScore();
+                    printHighScore();
                     break;
 
                 // EXIT
@@ -130,6 +130,14 @@ public class Menu {
                     sc.nextLine();
             }
         } while (menuOpen);
+    }
+
+    private void printHighScore() {
+        try {
+            new Player().printHighScore();
+        } catch (Exception e) {
+            System.out.println("There was an error in fetching the high-scores.");
+        }
     }
 
 
