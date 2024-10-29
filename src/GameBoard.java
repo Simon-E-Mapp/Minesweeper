@@ -55,6 +55,11 @@ public class GameBoard {
         cell.show();
         cell.setNearbyMines(count);
 
+        //if there is no nearbyMines start openAdjacentCells method
+        if (count == 0){
+            openAdjacentCells(x,y);
+        }
+
         //Checking for win-condition
         if (isGameWon()) {
             System.out.println("Congratulations! You Won!");
@@ -82,6 +87,32 @@ public class GameBoard {
         }
         return count;
     }
+    private void openAdjacentCells(int x, int y){
+        //check all the surrounding cells
+        for (int i = -1; i <= 1; i++){
+            for (int j = -1; j <= 1; j++){
+                int adjacentX = x + i;
+                int adjacentY = y + j;
+
+                //if the move is within the board and the chosen cell is not already visible or a mine then continue
+                if (isValidMove(adjacentX, adjacentY)){
+                    Cell adjacentCell = board[adjacentX][adjacentY];
+                    if (!adjacentCell.isVisible() && !adjacentCell.isMine()){
+                        //get the value of the cell with countAdjacentMines and open the cell and set mines count
+                        int adjacentCount = countAdjacentMines(adjacentX, adjacentY);
+                        adjacentCell.show();
+                        adjacentCell.setNearbyMines(adjacentCount);
+
+                        //keep running the method if the newly opened cell is a 0
+                        if (adjacentCount == 0){
+                            openAdjacentCells(adjacentX, adjacentY);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     //Check for winning-conditions
     public boolean isGameWon(){
         for (int x = 0; x < width; x++){

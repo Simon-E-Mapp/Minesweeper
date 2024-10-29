@@ -85,7 +85,7 @@ public class Menu {
                                 System.out.println("\033[3mDifficulty set to Medium\n\033[0m");
                                 currentWidth = 10;
                                 currentHeight = 10;
-                                currentMines = 10;
+                                currentMines = 20;
                                 subMenuOpen = false;
                                 player.setLevel("Medium");  //Da added 28/10
                                 break;
@@ -95,7 +95,7 @@ public class Menu {
                                 System.out.println("\033[3mDifficulty set to Hard\n\033[0m");
                                 currentWidth = 15;
                                 currentHeight = 15;
-                                currentMines = 15;
+                                currentMines = 45;
                                 subMenuOpen = false;
                                 player.setLevel("Hard"); //Da added 28/10
                                 break;
