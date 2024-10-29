@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
+
 public class Menu {
     Scanner sc = new Scanner(System.in);
     boolean menuOpen = true;
@@ -57,7 +58,6 @@ public class Menu {
 
                     do {
                         // Write out which difficulty they are on currently somehow
-                        System.out.println("\033[3mYour difficulty is currently set to:\n\033[0m");
                         System.out.println("\033[3mPlease select one of following options:\n\033[0m");
 
                         System.out.print("\033[1;97m");
@@ -115,11 +115,7 @@ public class Menu {
 
                 // HIGHSCORE
                 case 3:
-                    try {
-                        new Player().printHighScore();
-                    } catch (Exception e) {
-                        System.out.println("There was an error in fetching the high-scores.");
-                    }
+                    InputHandler.printHighScore();
                     break;
 
                 // EXIT
