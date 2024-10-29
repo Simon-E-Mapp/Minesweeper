@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class Player extends Game{
+public class Player extends Game {
 
     private String name, level;
     private long higsScoretime;
@@ -12,23 +12,19 @@ public class Player extends Game{
 
 
     public Player() {
-    super();
+        super();
     }
 
-    public Player(String name,long time, String level) { //removed long time
+    public Player(String name, long time, String level) { //removed long time
         this.name = name;
-       this.time = time;
+        this.time = time;
         this.level = level;
     }
 
-    /**
-     * the method writes to the file highscore.txt
-     *
-     * @param player object of type Player
-     * @throws IOException
-     */
-    // TODO writeToHighscore
-    public void writeToHighscore(Player player, long time) throws IOException {
+
+    //Method writes to the file highscore.txt
+
+    public void writeToHighScore(Player player, long time) throws IOException {
 
         PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen
 
@@ -40,12 +36,10 @@ public class Player extends Game{
 
     }
 
-    /**
-     * the method reads data from the file Higjscore.txt and
-     * saves the information in the highscore list
-     *
-     * @throws IOException
-     */
+
+    /*  the method reads data from the file Higjscore.txt and
+      saves the information in the highscore list */
+
     public void readHighScore() throws IOException {
 
         //make stream from file
@@ -63,11 +57,9 @@ public class Player extends Game{
         }
     }
 
-    /**
-     * Prints the top 10 of all levels on the console
-     *
-     * @throws IOException
-     */
+
+     // Prints the top 10 of all levels on the console
+
     public void printHighScore() throws IOException {
 
         readHighScore();
@@ -83,54 +75,47 @@ public class Player extends Game{
                 .filter(player -> "Hard".equals(player.getLevel())).toList();
 
 
-
         //convert all highscore list to sorted list
         List<Player> sortedHardLevel = sortHighScoreList(hardLevel);
         List<Player> sortedMediumLevel = sortHighScoreList(mediumLevel);
         List<Player> sortedEasyLevel = sortHighScoreList(easyLevel);
 
         System.out.println("******* HARD *********");
-        for (int i = 0; i < sortedHardLevel.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.println(1 + i + ". " + sortedHardLevel.get(i).getName() + " " + convertToHourMinSec(sortedHardLevel.get(i).getTime()));
         }
 
         System.out.println("******* MEDIUM *********");
-        for (int i = 0; i < sortedMediumLevel.size(); i++) {
+        for (int i = 0; i < 10; i++) {
 
             System.out.println(1 + i + ". " + sortedMediumLevel.get(i).getName() + " " + convertToHourMinSec(sortedMediumLevel.get(i).getTime()));
         }
 
         System.out.println("******* EASY *********");
-        for (int i = 0; i < sortedEasyLevel.size(); i++) {
+        for (int i = 0; i < 10; i++) {
             System.out.println(1 + i + ". " + sortedEasyLevel.get(i).getName() + " " + convertToHourMinSec(sortedEasyLevel.get(i).getTime()));
         }
     }
 
-    /**
-     * For ease of sorting the times, its saved in milliseconds.
-     * This method converts to a string with the format HH:MIN:SEC
-     * @param time in milliseconds
-     * @return String in format HH:MIN:SEC
-     */
+
+     /* For ease of sorting the times, its saved in milliseconds.
+     * This method converts to a string with the format HH:MIN:SEC */
 
     public String convertToHourMinSec(long time) {
 
         long hour, sec, min;
 
-        sec =  ((time / 1000) % 60);
-        min =  ((time / (1000 * 60)) % 60);
+        sec = ((time / 1000) % 60);
+        min = ((time / (1000 * 60)) % 60);
         hour = (time / (1000 * 60 * 60));
 
         return hour + ":" + min + ":" + sec;
 
     }
 
-    /**
-     *method sorts a list in order of lowest time to highest time
-     *
-     * @param highScore list to be sorted
-     * @return a sorted list
-     */
+
+     // method sorts a list in order of lowest time to highest time
+
     public List<Player> sortHighScoreList(List<Player> highScore) {
 
         //kopiera listan för att inte göra ändringar i orginalet

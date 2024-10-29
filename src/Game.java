@@ -38,7 +38,7 @@ public class Game {
         time = (endTime - startTime);
 
         if (board.isGameWon()) {
-            player.writeToHighscore(player, time);
+            player.writeToHighScore(player, time);
         }
     }
 
