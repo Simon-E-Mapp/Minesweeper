@@ -21,7 +21,7 @@ public class Game {
         while (true) {
             board.showBoard();
             // add board.showFullBoard(); for easier troubleshooting.
-            System.out.println("\nEnter your move (e.g., 'A 5' for column A, row 5):");
+            System.out.println(Design.ITALICS+"\nEnter your move (e.g., 'A 5' for column A, row 5):"+Design.RESET_TEXT);
             // Get player input - column as letter, row as number
             try {
                 String column = scanner.next().toUpperCase();
@@ -33,11 +33,11 @@ public class Game {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Invalid move! Please use format 'A 5'");
+                System.out.println(Design.RED_BOLD + "Invalid move! Please use format 'A 5'" + Design.RESET_TEXT);
                 scanner.nextLine(); // Clear scanner buffer
             }
         }
-        System.out.println("Thanks for playing!");
+        System.out.println("\nThanks for playing!\n");
 
         long endTime = System.currentTimeMillis();
         time = (endTime - startTime);
@@ -46,7 +46,7 @@ public class Game {
             try {
                 player.writeToHighscore(player, time);
             } catch (IOException e) {
-                System.out.println("Couldn't save high score!");
+                System.out.println(Design.RED_BOLD + "Couldn't save high score!" + Design.RESET_TEXT);
             }
 
         }

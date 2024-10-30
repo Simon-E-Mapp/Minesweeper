@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-
 public class Menu {
     Scanner sc = new Scanner(System.in);
     boolean menuOpen = true;
@@ -23,20 +22,20 @@ public class Menu {
     private void displayMenu() throws IOException {
         do {
             // Prints the banner
-            System.out.print("\033[1;94m");
+            System.out.print(Design.BLUE_BOLD);
             System.out.println("\n==========|| MAIN MENU ||=========");
             System.out.println("__________________________________");
-            System.out.print("\033[0m");
+            System.out.print(Design.RESET_TEXT);
 
-            System.out.println("\033[3mPlease select an option from 1-4:\n\033[0m");
+            System.out.println(Design.ITALICS + "\nPlease select an option from 1-4:\n" + Design.RESET_TEXT);
 
             // Prints Main Menu options
-            System.out.print("\033[1;97m");
+            System.out.print(Design.WHITE_BOLD);
             System.out.println("1) Start Game");
             System.out.println("2) Change Difficulty");
             System.out.println("3) Print high-score");
             System.out.println("4) Exit Game");
-            System.out.print("\n\033[0m");
+            System.out.print(Design.RESET_TEXT);
 
             // Takes input from player
             input = InputHandler.getPlayerInt();
@@ -45,7 +44,7 @@ public class Menu {
 
                 // GAME START
                 case 1:
-                    System.out.println("Please enter your name.");
+                    System.out.println(Design.ITALICS + "\nPlease enter your name." + Design.RESET_TEXT);
                     player.setName(InputHandler.getPlayerName());
 
                     game.startGame(currentWidth, currentHeight, currentMines, player);
@@ -57,21 +56,22 @@ public class Menu {
 
                     do {
                         // Write out which difficulty they are on currently somehow
-                        System.out.println("\033[3mPlease select one of following options:\n\033[0m");
+                        System.out.println(Design.ITALICS + "\nPlease select one of following options:\n"
+                                + Design.RESET_TEXT);
 
-                        System.out.print("\033[1;97m");
+                        System.out.print(Design.WHITE_BOLD);
                         System.out.println("1) Easy");
                         System.out.println("2) Medium");
                         System.out.println("3) Hard");
                         System.out.println("4) Go Back");
-                        System.out.print("\n\033[0m");
+                        System.out.print(Design.RESET_TEXT);
 
                         input = InputHandler.getPlayerInt();
 
                         switch (input) {
                             case 1:
                                 // Set game to easy difficulty
-                                System.out.println("\033[3mDifficulty set to Easy\n\033[0m");
+                                System.out.println("\nDifficulty set to Easy\n");
                                 currentWidth = 5;
                                 currentHeight = 5;
                                 currentMines = 5;
@@ -81,7 +81,7 @@ public class Menu {
 
                             case 2:
                                 // Set game to medium difficulty
-                                System.out.println("\033[3mDifficulty set to Medium\n\033[0m");
+                                System.out.println("\nDifficulty set to Medium\n");
                                 currentWidth = 10;
                                 currentHeight = 10;
                                 currentMines = 20;
@@ -91,7 +91,7 @@ public class Menu {
 
                             case 3:
                                 // Set game to hard difficulty
-                                System.out.println("\033[3mDifficulty set to Hard\n\033[0m");
+                                System.out.println("\nDifficulty set to Hard\n");
                                 currentWidth = 15;
                                 currentHeight = 15;
                                 currentMines = 45;
@@ -106,8 +106,7 @@ public class Menu {
 
                             // Displays error message
                             default:
-                                System.out.println("Please select a number between 1-4");
-                                sc.nextLine();
+                                System.out.println(Design.RED_BOLD+"Please select a number between 1-4"+Design.RESET_TEXT);
                         }
                     } while (subMenuOpen);
                     break;
@@ -125,8 +124,8 @@ public class Menu {
 
                 // ERROR MESSAGE
                 default:
-                    System.out.println("Please enter a number between 1-4");
-                    sc.nextLine();
+                    System.out.println(Design.RED_BOLD + "Please enter a number between 1-4" + Design.RESET_TEXT);
+
             }
         } while (menuOpen);
     }
@@ -135,7 +134,7 @@ public class Menu {
         try {
             new Player().printHighScore();
         } catch (Exception e) {
-            System.out.println("There was an error in fetching the high-scores.");
+            System.out.println(Design.RED_BOLD + "There was an error in fetching the high-scores." + Design.RESET_TEXT);
         }
     }
 
