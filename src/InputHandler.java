@@ -14,7 +14,7 @@ public class InputHandler {
         return playerInt;
     }
 
-    //Handles different strings
+    //Handles strings in the menu
     public static String getPlayerName() {
         String playerName = sc.nextLine();
         System.out.println("Hi, " + playerName + "!");
