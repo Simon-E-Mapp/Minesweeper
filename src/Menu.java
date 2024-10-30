@@ -8,12 +8,12 @@ public class Menu {
     int input = -1;
     Player player = new Player();
 
+    //Menu handles board size
     Game game;
     private int currentWidth = 10;
     private int currentHeight = 10;
     private int currentMines = 10;
 
-    // Constructor:
     public Menu() throws IOException {
         this.game = new Game();
         displayMenu();
@@ -48,7 +48,6 @@ public class Menu {
                     System.out.println("Please enter your name.");
                     player.setName(InputHandler.getPlayerName());
 
-                    // Call game method from the Game class to start game?
                     game.startGame(currentWidth, currentHeight, currentMines, player);
                     break;
 
@@ -77,7 +76,7 @@ public class Menu {
                                 currentHeight = 5;
                                 currentMines = 5;
                                 subMenuOpen = false;
-                                player.setLevel("Easy");   //Da added 28/10
+                                player.setLevel("Easy");
                                 break;
 
                             case 2:
@@ -87,7 +86,7 @@ public class Menu {
                                 currentHeight = 10;
                                 currentMines = 20;
                                 subMenuOpen = false;
-                                player.setLevel("Medium");  //Da added 28/10
+                                player.setLevel("Medium");
                                 break;
 
                             case 3:
@@ -97,7 +96,7 @@ public class Menu {
                                 currentHeight = 15;
                                 currentMines = 45;
                                 subMenuOpen = false;
-                                player.setLevel("Hard"); //Da added 28/10
+                                player.setLevel("Hard");
                                 break;
 
                             // Goes back to the main menu

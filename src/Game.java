@@ -16,7 +16,7 @@ public class Game {
         this.board = new GameBoard(width, height, mines);
         System.out.println("Game started!");
 
-        long startTime = System.currentTimeMillis();  // TODO test
+        long startTime = System.currentTimeMillis();
 
         while (true) {
             board.showBoard();
@@ -39,7 +39,7 @@ public class Game {
         }
         System.out.println("Thanks for playing!");
 
-        long endTime = System.currentTimeMillis();    //Todo test
+        long endTime = System.currentTimeMillis();
         time = (endTime - startTime);
 
         if (board.isGameWon()) {
