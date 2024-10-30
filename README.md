@@ -10,7 +10,7 @@ The game can be played in three different levels of difficulty.
 
 Features to be added
 - [ ] Option to flag a cell
-- [] Some kind of clock that shows the game time
+- [ ] Some kind of clock that shows the game time
 
 
 
