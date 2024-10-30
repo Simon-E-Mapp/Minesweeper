@@ -28,5 +28,5 @@ Features to be added
 <picture><img width="305" height = "300" alt="gameOver" src="https://github.com/user-attachments/assets/4732aced-9fb6-47a5-ab8e-e318aa8639e1"></picture><br/>
 <p>Pictures of a game in progress</p>
 <picture><img width="305" alt="highscore" src="https://github.com/user-attachments/assets/4b9042db-9794-4e83-b43d-4501662a14ac"></picture>  
-<p>Higscores</p>
+<p>High-scores</p>
 
