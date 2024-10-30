@@ -1,11 +1,9 @@
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class InputHandler {
     private static Scanner sc = new Scanner(System.in);
 
-    // Handles Integers
+    // Handles Integers in the Menu
     public static int getPlayerInt() {
         while (!sc.hasNextInt()) {
             System.out.println("Please enter a number between 1-4");
@@ -16,13 +14,11 @@ public class InputHandler {
         return playerInt;
     }
 
-    //Handles different strings
-    //TODO add more functionality beyond "getplayername"
+    //Handles strings in the menu
     public static String getPlayerName() {
         String playerName = sc.nextLine();
         System.out.println("Hi, " + playerName + "!");
         return playerName;
     }
-
 
 }

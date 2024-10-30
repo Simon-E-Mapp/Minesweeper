@@ -2,9 +2,10 @@ import java.io.*;
 import java.util.*;
 
 
-public class Player extends Game {
+public class Player extends Game{
 
-    private String name, level;
+    private String name;
+    private String level = "Medium";
     private long higsScoretime;
     private long time;
 
@@ -12,21 +13,26 @@ public class Player extends Game {
 
 
     public Player() {
-        super();
+    super();
     }
 
-    public Player(String name, long time, String level) { //removed long time
+    public Player(String name,long time, String level) { //removed long time
         this.name = name;
         this.time = time;
         this.level = level;
     }
 
+    /**
+     * the method writes to the file highscore.txt
+     *
+     * @param player object of type Player
+     * @throws IOException
+     */
 
-    //Method writes to the file highscore.txt
+    public void writeToHighscore(Player player, long time) throws IOException {
 
-    public void writeToHighScore(Player player, long time) throws IOException {
-
-        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));    //true om vi beålla data i filen
+        //append set to "true" if we want to keep data in the file
+        PrintWriter output = new PrintWriter(new BufferedWriter(new FileWriter("src/Highscore.txt", true)));
 
         output.println(player.getName());
         output.println(time);
@@ -36,10 +42,12 @@ public class Player extends Game {
 
     }
 
-
-    /*  the method reads data from the file Higjscore.txt and
-      saves the information in the highscore list */
-
+    /**
+     * the method reads data from the file Higjscore.txt and
+     * saves the information in the highscore list
+     *
+     * @throws IOException
+     */
     public void readHighScore() throws IOException {
 
         //make stream from file
@@ -48,7 +56,7 @@ public class Player extends Game {
         //read file
         while (true) {
             String name = input.readLine();
-            if (name == null)        //end of file??
+            if (name == null)
                 break;
             higsScoretime = Long.parseLong(input.readLine());
             String level = input.readLine();
@@ -57,68 +65,77 @@ public class Player extends Game {
         }
     }
 
-
-     // Prints the top 10 of all levels on the console
-
+    /**
+     * Prints the top 10 of all levels on the console
+     *
+     * @throws IOException
+     */
     public void printHighScore() throws IOException {
 
         readHighScore();
 
-        List<Player> easyLevel = highScore.stream()                             //make a list of all Easy players
+        List<Player> easyLevel = highScore.stream()                          //make a list of all Easy players
                 .filter(player -> "Easy".equals(player.getLevel()))          // use java stream to sort those out
                 .toList();
 
-        List<Player> mediumLevel = highScore.stream()                           //make a list of all level Medium Players
+        List<Player> mediumLevel = highScore.stream()                        //make a list of all level Medium Players
                 .filter(player -> "Medium".equals(player.getLevel())).toList();
 
         List<Player> hardLevel = highScore.stream()                          //make a list of all level hard Players
                 .filter(player -> "Hard".equals(player.getLevel())).toList();
 
 
-        //convert all highscore list to sorted list
+
+        //convert all high-score lists to sorted list
         List<Player> sortedHardLevel = sortHighScoreList(hardLevel);
         List<Player> sortedMediumLevel = sortHighScoreList(mediumLevel);
         List<Player> sortedEasyLevel = sortHighScoreList(easyLevel);
 
         System.out.println("******* HARD *********");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < sortedHardLevel.size(); i++) {
             System.out.println(1 + i + ". " + sortedHardLevel.get(i).getName() + " " + convertToHourMinSec(sortedHardLevel.get(i).getTime()));
         }
 
         System.out.println("******* MEDIUM *********");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < sortedMediumLevel.size(); i++) {
 
             System.out.println(1 + i + ". " + sortedMediumLevel.get(i).getName() + " " + convertToHourMinSec(sortedMediumLevel.get(i).getTime()));
         }
 
         System.out.println("******* EASY *********");
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < sortedEasyLevel.size(); i++) {
             System.out.println(1 + i + ". " + sortedEasyLevel.get(i).getName() + " " + convertToHourMinSec(sortedEasyLevel.get(i).getTime()));
         }
     }
 
-
-     /* For ease of sorting the times, its saved in milliseconds.
-     * This method converts to a string with the format HH:MIN:SEC */
+    /**
+     * For ease of sorting the times, its saved in milliseconds.
+     * This method converts to a string with the format HH:MIN:SEC
+     * @param time in milliseconds
+     * @return String in format HH:MIN:SEC
+     */
 
     public String convertToHourMinSec(long time) {
 
         long hour, sec, min;
 
-        sec = ((time / 1000) % 60);
-        min = ((time / (1000 * 60)) % 60);
+        sec =  ((time / 1000) % 60);
+        min =  ((time / (1000 * 60)) % 60);
         hour = (time / (1000 * 60 * 60));
 
         return hour + ":" + min + ":" + sec;
 
     }
 
-
-     // method sorts a list in order of lowest time to highest time
-
+    /**
+     *method sorts a list in order of lowest time to highest time
+     *
+     * @param highScore list to be sorted
+     * @return a sorted list
+     */
     public List<Player> sortHighScoreList(List<Player> highScore) {
 
-        //kopiera listan för att inte göra ändringar i orginalet
+        //copies the list to not make changes to the original
         List<Player> sortedList = new ArrayList<>(highScore);
 
         Collections.sort(sortedList, new Comparator<Player>() {
@@ -139,7 +156,7 @@ public class Player extends Game {
 
     public long getTime() {
 
-        return time;// / 1000;     //Convert in to seconds from milliseconds
+        return time;// / 1000;     //Converts to seconds from milliseconds
     }
 
     public String getLevel() {
@@ -150,7 +167,6 @@ public class Player extends Game {
         this.level = level;
     }
 
-    // (Elin) added a setter here to get the name in the menu
     public void setName(String name) {
         this.name = name;
     }
