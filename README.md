@@ -1,6 +1,6 @@
 # 💣 MINESWEEPER 💣
-A console game in java that imitates the classic microsoft minesweeper.the results of the ten best players from each level are saved in the highscore list.
-The game can be played in three different levels of difficulty.
+A console game in java that imitates the classic microsoft minesweeper. The results of the ten best players from each level are saved in a high-score list.
+The game can be played at three different levels of difficulty.
 
 | Level| Cells and Mines |
 |-----:|---------------|
