@@ -1,12 +1,10 @@
 public class Cell {
     private boolean isVisible;
-    private boolean isFlagged;
     private boolean isMine;
     private int nearbyMines;
 
     public Cell() {
         this.isVisible = false;
-        this.isFlagged = false;
         this.isMine = false;
         this.nearbyMines = 0;
     }
@@ -18,9 +16,6 @@ public class Cell {
     }
     public void show(){
         this.isVisible = true;
-    }
-    public void flag(){
-        this.isFlagged = true;
     }
     public void setMine(boolean isMine){
         this.isMine = isMine;
