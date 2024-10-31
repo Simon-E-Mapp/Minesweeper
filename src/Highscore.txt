@@ -7,3 +7,12 @@ Easy
 Maria Blom
 200000
 Easy
+Stig Svensson
+30399
+Hard
+Erik Andresson
+78526
+Hard
+Göran Nilsson
+72866
+Medium

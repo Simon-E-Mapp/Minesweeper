@@ -23,10 +23,7 @@ public class Player extends Game{
     }
 
     /**
-     * the method writes to the file highscore.txt
-     *
-     * @param player object of type Player
-     * @throws IOException
+     * the method writes to the file high-score.txt
      */
 
     public void writeToHighscore(Player player, long time) throws IOException {
@@ -42,11 +39,9 @@ public class Player extends Game{
 
     }
 
-    /**
-     * the method reads data from the file Higjscore.txt and
-     * saves the information in the highscore list
-     *
-     * @throws IOException
+    /*
+     * the method reads data from the file High-score.txt and
+     * saves the information in the high-score list
      */
     public void readHighScore() throws IOException {
 
@@ -86,11 +81,12 @@ public class Player extends Game{
 
 
 
-        //convert all high-score lists to sorted list
+        //make separated list for different levels and sort them
         List<Player> sortedHardLevel = sortHighScoreList(hardLevel);
         List<Player> sortedMediumLevel = sortHighScoreList(mediumLevel);
         List<Player> sortedEasyLevel = sortHighScoreList(easyLevel);
 
+        System.out.println("---HIGHSCORE---");
         System.out.println("******* HARD *********");
         for (int i = 0; i < sortedHardLevel.size(); i++) {
             System.out.println(1 + i + ". " + sortedHardLevel.get(i).getName() + " " + convertToHourMinSec(sortedHardLevel.get(i).getTime()));
@@ -108,31 +104,38 @@ public class Player extends Game{
         }
     }
 
-    /**
-     * For ease of sorting the times, its saved in milliseconds.
-     * This method converts to a string with the format HH:MIN:SEC
-     * @param time in milliseconds
-     * @return String in format HH:MIN:SEC
-     */
+
+    /* For ease of sorting the times, its saved in milliseconds.
+     * This method converts to a string with the format HH:MIN:SEC */
+
 
     public String convertToHourMinSec(long time) {
 
-        long hour, sec, min;
+        //long hour, sec, min;
 
-        sec =  ((time / 1000) % 60);
-        min =  ((time / (1000 * 60)) % 60);
-        hour = (time / (1000 * 60 * 60));
+        String sec = Integer.toString((int) (time % 60));
+        String min = Integer.toString((int) ((time % 3600) / 60));
+        String hour = Integer.toString((int) (time / 3600));
+
+        if (sec.length() < 2) {
+            sec = "0" + sec;
+        }
+
+        if (min.length() < 2) {
+            min = "0" + min;
+        }
+
+        if (hour.length() < 2) {
+            hour = "0" + hour;
+        }
 
         return hour + ":" + min + ":" + sec;
 
     }
 
-    /**
-     *method sorts a list in order of lowest time to highest time
-     *
-     * @param highScore list to be sorted
-     * @return a sorted list
-     */
+
+     //method sorts a list in order of lowest time to highest time
+
     public List<Player> sortHighScoreList(List<Player> highScore) {
 
         //copies the list to not make changes to the original
