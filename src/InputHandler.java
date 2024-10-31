@@ -6,7 +6,7 @@ public class InputHandler {
     // Handles Integers in the Menu
     public static int getPlayerInt() {
         while (!sc.hasNextInt()) {
-            System.out.println("Please enter a number between 1-4");
+            System.out.println(Design.RED_BOLD + "Please enter a number between 1-4" + Design.RESET_TEXT);
             sc.nextLine();
         }
         int playerInt = sc.nextInt();
@@ -17,7 +17,7 @@ public class InputHandler {
     //Handles strings in the menu
     public static String getPlayerName() {
         String playerName = sc.nextLine();
-        System.out.println("Hi, " + playerName + "!");
+        System.out.println("\nHi, " + playerName + "!");
         return playerName;
     }
 

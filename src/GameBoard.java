@@ -6,20 +6,6 @@ public class GameBoard {
     private int height;
     private int mines;
 
-    private static final String RESET = "\u001B[0m";
-    private static final String RED_BACKGROUND = "\u001B[41m";
-    private static final String[] NUMBER_COLORS = {
-            "\u001B[97m",  // WHITE for 0
-            "\u001B[34m",  // BLUE for 1
-            "\u001B[32m",  // GREEN for 2
-            "\u001B[31m",  // RED for 3
-            "\u001B[35m",  // PURPLE for 4
-            "\u001B[33m",  // YELLOW for 5
-            "\u001B[36m",  // CYAN for 6
-            "\u001B[37m",  // WHITE for 7
-            "\u001B[90m"   // GRAY for 8
-    };
-
     public GameBoard(int width, int height, int mines) {
         this.width = width;
         this.height = height;
@@ -52,7 +38,7 @@ public class GameBoard {
 
     public boolean revealCell(int x, int y) {
         if (!isValidMove(x, y)) {
-            System.out.println("Invalid move! Please try again.");
+            System.out.println(Design.RED_BOLD + "Invalid move! Please try again.\n" + Design.RESET_TEXT);
             return true;
         }
 
@@ -61,7 +47,7 @@ public class GameBoard {
         // Check if player hit a mine
         if (cell.isMine()) {
             cell.show();  // Reveal the mine
-            System.out.println("Game Over! You hit a mine!");
+            System.out.println(Design.RED_UNDERLINE + "\nGame Over! You hit a mine!\n"+ Design.RESET_TEXT);
             return false;
         }
         // Calculate and display the number of adjacent mines
@@ -76,7 +62,7 @@ public class GameBoard {
 
         //Checking for win-condition
         if (isGameWon()) {
-            System.out.println("Congratulations! You Won!");
+            System.out.println(Design.GREEN_BOLD + "\n✮✮✮ Congratulations! You Won! ✮✮✮\n" + Design.RESET_TEXT);
             return false;
         }
         return true;
@@ -145,10 +131,10 @@ public class GameBoard {
             for (int x = 0; x < width; x++) {
                 if (board[x][y].isVisible()) {
                     if (board[x][y].isMine()) {
-                        System.out.print(RED_BACKGROUND + "*" + RESET + "|");
+                        System.out.print(Design.RED_BACKGROUND + "*" + Design.RESET + "|");
                     } else {
                         int mineCount = board[x][y].getNearbyMines();
-                        System.out.print(NUMBER_COLORS[mineCount] + mineCount + RESET + "|");
+                        System.out.print(Design.NUMBER_COLORS[mineCount] + mineCount + Design.RESET + "|");
                     }
                 } else {
                     System.out.print("+|");
@@ -174,10 +160,10 @@ public class GameBoard {
             for (int x = 0; x < width; x++) {
                 Cell cell = board[x][y];
                 if (cell.isMine()) {
-                    System.out.print(RED_BACKGROUND + "*" + RESET + "|");
+                    System.out.print(Design.RED_BACKGROUND + "*" + Design.RESET + "|");
                 } else {
                     int mineCount = countAdjacentMines(x, y);
-                    System.out.print(NUMBER_COLORS[mineCount] + mineCount + RESET + "|");
+                    System.out.print(Design.NUMBER_COLORS[mineCount] + mineCount + Design.RESET + "|");
                 }
             }
             System.out.print(" " + y);
